@@ -15,7 +15,6 @@ import { WalletProvider, useWallet} from "../utils/WalletContext";
 // const modelPath = "../spherebot.glb"
 
 
-
 function DeveloperHero() {
 
   const { account, linkWallet } = useWallet();
