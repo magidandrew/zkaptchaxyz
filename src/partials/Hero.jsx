@@ -43,7 +43,7 @@ function Hero() {
               Protecting smart contracts from bots.
             </h1>
             <p className="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">
-               ZKaptcha uses zero knowledge proofs to create sybil-resistant smart contracts.
+              ZKaptcha uses zero knowledge proofs to create sybil-resistant smart contracts.
             </p>
             <div
               className="max-w-xs mx-auto sm:max-w-none sm:inline-flex sm:justify-center space-y-4 sm:space-y-0 sm:space-x-4"
@@ -54,15 +54,13 @@ function Hero() {
                 <div>
                   <Link className="btn text-white bg-indigo-500 hover:bg-indigo-600 w-full shadow-sm group rounded-full" to="/Developers">
                     For Developers 👩‍💻
-                    <span className="tracking-normal text-sky-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                    </span>
+
                   </Link>
                 </div>
                 <div>
                   <Link className="btn text-white bg-indigo-500 hover:bg-indigo-600 w-full shadow-sm group rounded-full" to="/Users">
                     For Users 🙋‍♂️
-                    <span className="tracking-normal text-sky-300 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
-                    </span>
+
                   </Link>
                 </div>
               </div>
