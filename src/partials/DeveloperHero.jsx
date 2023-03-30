@@ -87,10 +87,12 @@ function DeveloperHero() {
           {/* Add a button that redirects to google.com */}
           <button
             className="btn text-white bg-indigo-500 hover:bg-indigo-600 w-half shadow-sm group rounded-full"
-            onClick={() => window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeJu-kGFT8kUHVo__dQU_IB-KbF6cTab0F1pHSHe6ndtr_1ZA/viewform"}
+            onClick={() => window.open("https://docs.google.com/forms/d/e/1FAIpQLSeJu-kGFT8kUHVo__dQU_IB-KbF6cTab0F1pHSHe6ndtr_1ZA/viewform")}
+            target="_blank"
           >
             Integrate Zkaptcha
           </button>
+
 
 
         </p>
