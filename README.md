@@ -1,15 +1,12 @@
 # Cube React
 
-React landing page template designed by Cruip.
-
 ## Project setup
 ```
-npm install
+yarn install
 ```
-
 ### Compiles and hot-reloads for development
 ```
-npm run dev
+yarn run dev
 ```
 
 ### Compiles and minifies for production
