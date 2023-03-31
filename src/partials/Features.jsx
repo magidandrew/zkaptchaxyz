@@ -31,6 +31,9 @@ Swiper.use([Autoplay, Navigation]);
 function Features() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const { account, linkWallet, disconnectWallet, provider } = useWallet();
+  const [tokenUri, setTokenUri] = useState(null);
+
+  var mp = null;
 
   const handleLinkWallet = async () => {
       await linkWallet();
@@ -81,22 +84,47 @@ function Features() {
   const handleMerkleProof = (merkleProof) => {
     // Do something with the merkleProof data
     console.log(merkleProof);
-    // mp = merkleProof;
+    mp = merkleProof;
   };
 
-  const handleSubmission = async (tokenURI) => {
-    console.log("handleSubmission: " + tokenURI);
-    setVideoModalOpen(false);
+  const handleSubmission = async (captchaAnswer) => {
+    // captchaAnswer
     console.log(provider);
-    const toAddress = "0xF988A798183058d830dEf45E592483E57Ef78002";
+    const encoder = new TextEncoder();
+    const dataBytes = encoder.encode(captchaAnswer);
+    const saltBytes = encoder.encode("0x293586Gnrg4");
+    const bytes = new Uint8Array([...dataBytes, ...saltBytes]);
+    console.log(bytes);
+
+    async function hashBytes(bytes) {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', bytes);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+      return hashHex;
+    }
+
+    const h = await hashBytes(bytes);
+    const leaf = ethers.utils.keccak256(ethers.utils.keccak256(ethers.utils.hexlify("0x" + h)));
+    console.log("leaf: " + leaf);
+    const toAddress = "0x13DF5D56bAC76aaE15cfE0aEDc19D04D1522130F";
+    setVideoModalOpen(false);
     const captchaCollectionContract = new ethers.Contract(toAddress, captchaCollectionABI.abi, provider.getSigner());
-    const res = await captchaCollectionContract.createToken();
+    // console.log("mp: " + mp);
+    // console.log("leaf: "+ leaf);
+    const mp1 = [
+                              "0x9d5913e05fea728f85833c11432990b3fed6d9d1d46a8f8092858433bf89bc02",
+                              "0x523e338ce4eaa4e78c5ba665d4a4fa60745b75a79980db547edb09a7650424e1",
+                              "0x82e12e554b92fa50a3f131c905d0ba4e8e8cab2e44513ddc795b4ebf60ca6bdd",
+         ]
 
+    const leaf1 = "0x9913e4db9d1e51fb530ba665d9e874c03745aa5a211b7afdca25906328fc82c5";
+    console.log(name2Uri[tokenUri]);
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    await sleep(1000);
+    const res = await captchaCollectionContract.createToken(name2Uri[tokenUri], mp1, leaf1);
   };
-
-  // const mintNft = async (tokenURI) => {
-  //   console.log(tokenURI)
-  // }
 
 
   return (
@@ -111,8 +139,8 @@ function Features() {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 font-hkgrotesk mb-4">Presenting the Kaptcha Collection!</h2>
             <div className="max-w-2xl mx-auto">
-              <p className="text-xl text-slate-500">
-                Here's a mock collection of NFTs. The NFT contract is protected by Zkaptcha.
+              <p className="text-xl text-slate-400">
+               This collection of NFTs is protected by ZKaptcha.
               </p>
             </div>
           </div>
@@ -130,15 +158,27 @@ function Features() {
                 <div className="grow">
                   <div className="font-hkgrotesk font-bold text-xl">Sam Altman Kaptcha</div>
                 </div>
+
+
+                {account ?
                 <div className="text-right">
                   <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true);}}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('altman')}}
                   >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
-
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
+
+
               </div>
 
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
@@ -151,12 +191,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Brian Armstrong Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('armstrong')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -168,12 +219,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Juan Benet Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('benet')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -185,12 +247,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Vitalik Buterin Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('buterin')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -202,12 +275,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Jack Dorsey Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('dorsey')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -219,12 +303,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Sam Bankman-Fried Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('fried')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -236,12 +331,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Gary Gensler Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('gensler')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -253,12 +359,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl"> Stani Kulechov Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('kulechov')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -270,12 +387,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Michael Saylor Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('saylor')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
                 <img
@@ -287,12 +415,23 @@ function Features() {
                   <div className="font-hkgrotesk font-bold text-xl">Changpeng Zhao Kaptcha</div>
 
                 </div>
+                {account ?
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 hover:bg-indigo-600 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); setTokenUri('zhao')}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
+                : (
+                  <div className="text-right">
+                  <a className="btn font-medium text-gray-800 hover:text-white bg-red-200 hover:bg-red-500 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  >
+                  Connect Wallet!
+                  </a>
+                </div>
+          )}
               </div>
 
             </div>

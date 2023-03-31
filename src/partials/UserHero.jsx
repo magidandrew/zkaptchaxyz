@@ -113,7 +113,7 @@ function UserHero() {
           </div>
 
 
-          {account ? (
+          {/* {account ? (
             <div className="max-w-3xl mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
                 <a className="btn text-white bg-indigo-500 hover:bg-indigo-600 rounded-full w-full mb-4 sm:w-auto sm:mb-0" href="#0" onClick={(e) => { setCheck(false); e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true); }}>
@@ -129,7 +129,7 @@ function UserHero() {
                 </a>
               </div>
             </div>
-          )}
+          )} */}
 
           {showButton && <div className="max-w-3xl mx-auto sm:max-w-none sm:flex sm:justify-center mt-4">
             <div data-aos="fade-up" data-aos-delay="400">

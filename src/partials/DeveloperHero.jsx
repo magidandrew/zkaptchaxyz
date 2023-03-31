@@ -7,7 +7,7 @@ import HeroImage from '../images/hero-image.png';
 // import Modal from "../utils/Modal";
 // import ThreeDModel from '../utils/ThreeDModel';
 import TerminalWindow from '../utils/TerminalWindow';
-const codeString2 = "zkaptcha = ZKaptchaInterface.at(\"0xF988A798183058d830dEf45E592483E57Ef78002\"); \nfunction mint() {\n\tassert(zkaptcha.verifyCaptcha(params)); \n\t// ...\n}";
+const codeString2 = "zkaptcha = ZKaptchaInterface.at(\"0xF988A798183058d830dEf45E592483E57Ef78002\"); \nfunction mint() {\n\trequire(zkaptcha.verifyCaptcha(params)); \n\t// ...\n}";
 const codeString = "// implement ZKaptcha anti-bot in your smart contract\ninterface ZkaptchaInterface {\n\tfunction verifyCaptcha(\n\t\tbytes32[] memory merkleProof, address user, bytes32 _hash, bytes calldata zkProof\n\t) external view returns (bool);\n}"
     + "\n\n" + codeString2;
 import SmartContractQuery from "../utils/SmartContractQuery";
@@ -91,7 +91,7 @@ function DeveloperHero() {
                 >
                     Integrate Zkaptcha
                 </button>
-                <button
+                {/* <button
                     className="btn text-white bg-indigo-500 hover:bg-indigo-600 w-half shadow-sm group rounded-full"
                     onClick={async () => {
                         const toAddress = '0x13DF5D56bAC76aaE15cfE0aEDc19D04D1522130F';
@@ -111,7 +111,7 @@ function DeveloperHero() {
                     }}
                 >
                     send tx
-                </button>
+                </button> */}
             </div>
 
 
