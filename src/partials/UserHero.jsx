@@ -9,7 +9,7 @@ import Modal from "../utils/Modal";
 import TerminalWindow from '../utils/TerminalWindow';
 const codeString = "// implement ZKaptcha anti-bot in your smart contract\nzkaptcha = ZKaptchaInterface.at(\"0cnkjrng30tgn\"); \nfunction mint() {\n\tassert(verify.verifyCaptcha(params)); \n\t// ...\n}";
 import Web3 from 'web3';
-import captchacollection from "../CaptchaCollection.json";
+import captchacollection from "../captchacollection.json";
 import { WalletProvider, useWallet } from "../utils/WalletContext";
 import { Fragment } from 'react';
 import Features from './Features';

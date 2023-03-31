@@ -25,14 +25,15 @@ function Faqs() {
               <div className="space-y-2">
                 <h4 className="text-xl font-hkgrotesk font-medium">Why not just use web2 CAPTCHAs and Midpoint or consensus-based solutions like Chainlink?</h4>
                 <p className="text-slate-500">
-                Midpoint doesn’t get off-chain data through consensus which is risky. Midpoint is also fully centralized and works on a callback model which introduces big delays especially if you are blocking a function call with it. Fully consensus-based mechanisms like Chainlink are very expensive and not scalable if every KAPTCHA verification has to be done multiple times.
+                Midpoint doesn’t get off-chain data through consensus which is risky. Midpoint is also fully centralized and works on a callback model which introduces big delays especially if you are blocking a function call with it.
+                Fully consensus-based mechanisms like Chainlink hook into Web2 Captchas. But they are very expensive and not scalable if every KAPTCHA verification has to be done multiple times.
                 </p>
               </div>
               {/* Item */}
               <div className="space-y-2">
                 <h4 className="text-xl font-hkgrotesk font-medium">Isn’t there a race condition when new Merkle roots get issued? What if Alice gets a KAPTCHA from MerkleTree0 and in the time it takes her to solve it, MerkleTree1 is now the valid tree in the verifier?</h4>
                 <p className="text-slate-500">
-                Yes, but we have enabled a sliding window of the 3 most recent Merkle roots to be valid so that the probability of this happening is very very small. For example, when the one currently active Merkle root has few unique KAPTCHAs remaining, a second Merkle root also becomes available. One the first one gets exhausted, the second will be valid. Then the pattern repeats. The probability of a race condition becomes very, very small and in the worst case, they just redo the KAPTCHA.
+                Not at all. Verification in your smart contracts will cost around 80,000 gas extra, which for usual gas prices, is a small fraction of a cent more. For example, when the one currently active Merkle root has few unique KAPTCHAs remaining, a second Merkle root also becomes available. One the first one gets exhausted, the second will be valid. Then the pattern repeats. The probability of a race condition becomes very, very small and in the worst case, they just redo the KAPTCHA.
                 </p>
               </div>
             </div>
@@ -42,14 +43,13 @@ function Faqs() {
               <div className="space-y-2">
                 <h4 className="text-xl font-hkgrotesk font-medium"> Can’t attackers outsource their KAPTCHAs using services like 2Captcha, Anti-Captcha, Anycaptcha, or DeathByCaptcha?</h4>
                 <p className="text-slate-500">
-                Yes, this is possible. These services are for very determined attackers and currently don’t pose an existential threat to web2 CAPTCHAs. Unfortunately, solving the problem of outsourcing CAPTCHAs is very difficult by definition. If the test is designed to distinguish a human and a bot, sending the challenge to another human to be completed still satisfies the requirements. We plan to upgrade our captcha challenges by using zero knowledge machine learning. This will let us use mouse tracking classifiers and browser data to produce more accurate judgements.
-                </p>
+                If the test is designed to distinguish a human and a bot, sending the challenge to another human to be completed still satisfies the requirements. We plan to upgrade our captcha challenges by using zero-knowledge machine learning. This will let us use mouse tracking classifiers and browser data to produce more accurate judgements.</p>
               </div>
               {/* Item */}
               <div className="space-y-2">
                 <h4 className="text-xl font-hkgrotesk font-medium"> Doesn’t this kill automation? Isn’t some automation on blockchains good?</h4>
                 <p className="text-slate-500">
-                Yes, but only when the dApp wants to kill automation. The smart contract can always turn off the KAPTCHA verification after a certain period of time (ex. after the first k blocks once a token is listed on an exchange, or can be manually turned on or off by the contract owner).
+                Only when the dApp wants to kill automation. The smart contract can always turn off the KAPTCHA verification after a certain period of time (ex. after the first k blocks once a token is listed on an exchange, or can be manually turned on or off by the contract owner).
                 </p>
                 </div>
               {/* Item */}

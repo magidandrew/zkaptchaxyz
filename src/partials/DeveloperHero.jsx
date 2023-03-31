@@ -46,7 +46,7 @@ function DeveloperHero() {
                             Easy Integration and <br></br>Anti-Bot Reputation.
                         </h1>
                         <p className="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">
-                            Add our interface to your smart contract to use the ZKaptcha verifier (deployed on Scroll).
+                        Add a 4 line interface and a single require statement to use ZKaptcha in your smart contracts (deployed on Scroll).
                         </p>
                     </div>
 
@@ -63,7 +63,9 @@ function DeveloperHero() {
                     SybilRank
                 </h1>
                 <p className="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">
-                    SybilRank is based on an account’s past interactions with ZKaptcha. SybilRank provides a score that allows dApp developers to set their own threshold for what they consider to be suspicious behavior, and take appropriate actions, such as blocking or challenging users, based on that score
+                    SybilRank is based on an account’s past interactions with ZKaptcha.
+                    SybilRank provides a score that allows dApp developers to set their own threshold for what they consider to be suspicious behavior,
+                    and take appropriate actions, such as blocking or challenging users, based on that score. A score of 0 is likely a bot, while a score of 100 is very much a human
                     (built on Optimism).
                 </p>
             </div>
