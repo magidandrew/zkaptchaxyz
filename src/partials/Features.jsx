@@ -5,6 +5,18 @@ import FeaturesIcon01 from '../images/features-icon-01.svg';
 import FeaturesIcon02 from '../images/features-icon-02.svg';
 import FeaturesIcon03 from '../images/features-icon-03.svg';
 import FeaturesIcon04 from '../images/features-icon-04.svg';
+import Avatar01 from '../images/avatar-01.jpg';
+import Altman from '../images/altman.png';
+import Armstrong from '../images/armstrong.png';
+import Benet from '../images/benet.png';
+import Buterin from '../images/buterin.png';
+import Dorsey from '../images/dorsey.png';
+import Fried from '../images/fried.png';
+import Gensler from '../images/gensler.png';
+import Kulechov from '../images/kulechov.png';
+import Saylor from '../images/saylor.png';
+import Zhao from '../images/zhao.png';
+
 
 // Import Swiper
 import Swiper, { Autoplay, Navigation } from 'swiper';
@@ -51,10 +63,10 @@ function Features() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 font-hkgrotesk mb-4">Many tools to express your creativity</h2>
+            <h2 className="h2 font-hkgrotesk mb-4">Presenting the Kaptcha Collection!</h2>
             <div className="max-w-2xl mx-auto">
               <p className="text-xl text-slate-500">
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.
+                Here's a mock collection of NFTs. The NFT contract is protected by Zkaptcha.
               </p>
             </div>
           </div>
@@ -64,65 +76,179 @@ function Features() {
             <div className="swiper-wrapper">
               {/* Carousel items */}
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
-                <img className="mb-3" src={FeaturesIcon01} width="56" height="56" alt="Icon 01" />
+                <img
+                  className="mb-3"
+                  src={Altman}
+                  alt="Icon 01"
+                />
                 <div className="grow">
-                  <div className="font-hkgrotesk font-bold text-xl">Collaboration</div>
-                  <div className="text-slate-500 mb-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                  </div>
+                  <div className="font-hkgrotesk font-bold text-xl">Sam Altman Kaptcha</div>
+
                 </div>
                 <div className="text-right">
                   <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
-                    Learn More{' '}
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Armstrong}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl">Brian Armstrong Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
-                <img className="mb-3" src={FeaturesIcon02} width="56" height="56" alt="Icon 02" />
+                <img
+                  className="mb-3"
+                  src={Benet}
+                  alt="Icon 01"
+                />
                 <div className="grow">
-                  <div className="font-hkgrotesk font-bold text-xl">Experiences</div>
-                  <div className="text-slate-500 mb-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                  </div>
+                  <div className="font-hkgrotesk font-bold text-xl">Juan Benet Kaptcha</div>
+
                 </div>
                 <div className="text-right">
                   <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
-                    Learn More{' '}
+                    Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
-                <img className="mb-3" src={FeaturesIcon03} width="56" height="56" alt="Icon 03" />
+                <img
+                  className="mb-3"
+                  src={Buterin}
+                  alt="Icon 01"
+                />
                 <div className="grow">
-                  <div className="font-hkgrotesk font-bold text-xl">Animation</div>
-                  <div className="text-slate-500 mb-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                  </div>
+                  <div className="font-hkgrotesk font-bold text-xl">Vitalik Buterin Kaptcha</div>
+
                 </div>
                 <div className="text-right">
                   <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
-                    Learn More{' '}
+                    Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
               </div>
               <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
-                <img className="mb-3" src={FeaturesIcon04} width="56" height="56" alt="Icon 04" />
+                <img
+                  className="mb-3"
+                  src={Dorsey}
+                  alt="Icon 01"
+                />
                 <div className="grow">
-                  <div className="font-hkgrotesk font-bold text-xl">Modeling</div>
-                  <div className="text-slate-500 mb-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
-                  </div>
+                  <div className="font-hkgrotesk font-bold text-xl">Jack Dorsey Kaptcha</div>
+
                 </div>
                 <div className="text-right">
                   <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
-                    Learn More{' '}
+                    Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
               </div>
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Fried}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl">Sam Bank-Fried Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Gensler}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl">Gary Gensler Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Kulechov}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl"> Stani Kulechov Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Saylor}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl">Michael Saylor Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+              <div className="swiper-slide h-auto flex flex-col bg-slate-800 p-6 rounded">
+                <img
+                  className="mb-3"
+                  src={Zhao}
+                  alt="Icon 01"
+                />
+                <div className="grow">
+                  <div className="font-hkgrotesk font-bold text-xl">Changpeng Zhao Kaptcha</div>
+
+                </div>
+                <div className="text-right">
+                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                    Mint Now{' '}
+                    <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
+                  </a>
+                </div>
+              </div>
+
+
+
             </div>
           </div>
           {/* Arrows */}

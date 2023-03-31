@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import Illustration from '../images/hero-illustration.svg';
@@ -10,7 +10,11 @@ import TerminalWindow from '../utils/TerminalWindow';
 const codeString = "// implement ZKaptcha anti-bot in your smart contract\nzkaptcha = ZKaptchaInterface.at(\"0cnkjrng30tgn\"); \nfunction mint() {\n\tassert(verify.verifyCaptcha(params)); \n\t// ...\n}";
 import Web3 from 'web3';
 import captchacollection from "../CaptchaCollection.json";
-import { WalletProvider, useWallet} from "../utils/WalletContext";
+import { WalletProvider, useWallet } from "../utils/WalletContext";
+import { Fragment } from 'react';
+import Features from './Features';
+import IconList from './IconList';
+import Features02 from './Features02';
 
 
 
@@ -71,21 +75,21 @@ function UserHero() {
     const hash = Web3.utils.keccak256(Web3.utils.keccak256(h));
     console.log(hash);
 
-  //   const web3 = new Web3('https://alpha-rpc.scroll.io/l2');
-  //   console.log(web3);
-  //   const address= "0x3399D548ef38e36dF219f08c99dDC7230ddf8aE4";
+    //   const web3 = new Web3('https://alpha-rpc.scroll.io/l2');
+    //   console.log(web3);
+    //   const address= "0x3399D548ef38e36dF219f08c99dDC7230ddf8aE4";
 
-  //   const contract = new web3.eth.Contract(captchacollection.abi, address);
-  //   console.log(contract);
-  //   const gasLimit = 80000;
-  //   console.log("account: " + account);
-  //   contract.methods.createToken("https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/armstrong.json", mp, hash).send({ from: account, gas: gasLimit }, (error, transactionHash) => {
-  //     if (error) {
-  //         console.error(error);
-  //     } else {
-  //         console.log(transactionHash);
-  //     }
-  // });
+    //   const contract = new web3.eth.Contract(captchacollection.abi, address);
+    //   console.log(contract);
+    //   const gasLimit = 80000;
+    //   console.log("account: " + account);
+    //   contract.methods.createToken("https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/armstrong.json", mp, hash).send({ from: account, gas: gasLimit }, (error, transactionHash) => {
+    //     if (error) {
+    //         console.error(error);
+    //     } else {
+    //         console.log(transactionHash);
+    //     }
+    // });
 
     setMintResult(true);
 
@@ -93,9 +97,9 @@ function UserHero() {
 
 
 
-  // const myString = 'hello world';
-  // const myBytes = Buffer.from([0x01, 0x02, 0x03]);
-  // const result = hashStringWithBytes(myString, myBytes);
+    // const myString = 'hello world';
+    // const myBytes = Buffer.from([0x01, 0x02, 0x03]);
+    // const result = hashStringWithBytes(myString, myBytes);
 
   }
 
@@ -123,7 +127,7 @@ function UserHero() {
               Protecting smart contracts from bots.
             </h1>
             <p className="text-xl text-slate-400 mb-10" data-aos="fade-up" data-aos-delay="100">
-               ZKaptcha uses zero knowledge proofs to create sybil-resistant smart contracts.
+              ZKaptcha uses zero knowledge proofs to create sybil-resistant smart contracts.
             </p>
           </div>
 
@@ -138,12 +142,12 @@ function UserHero() {
             </div>
           ) : (
             <div className="max-w-3xl mx-auto sm:max-w-none sm:flex sm:justify-center">
-            <div data-aos="fade-up" data-aos-delay="400">
-              <a className="btn text-gray-600 bg-red-100 hover:bg-red-400 rounded-full w-full mb-4 sm:w-auto sm:mb-0" >
-                Wallet Needs To Be Connected!
-              </a>
+              <div data-aos="fade-up" data-aos-delay="400">
+                <a className="btn text-gray-600 bg-red-100 hover:bg-red-400 rounded-full w-full mb-4 sm:w-auto sm:mb-0" >
+                  Wallet Needs To Be Connected!
+                </a>
+              </div>
             </div>
-          </div>
           )}
 
           {showButton && <div className="max-w-3xl mx-auto sm:max-w-none sm:flex sm:justify-center mt-4">
@@ -152,7 +156,7 @@ function UserHero() {
                 Minted Successfully!
               </a>
             </div>
-          </div> }
+          </div>}
 
           <Modal id="modal" ariaLabel="modal-headlinew to" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)} onMerkleProof={handleMerkleProof} >
             <div className="relative w-full h-full md:h-auto">
@@ -170,7 +174,7 @@ function UserHero() {
                     />
                   </div>
                   <div data-aos="fade-up" data-aos-delay="400">
-                    <button className="mb-3 mt-3  bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-transform duration-150 ease-in-out" onClick={()=>{setVideoModalOpen(false); mintNft();}}  >
+                    <button className="mb-3 mt-3  bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-transform duration-150 ease-in-out" onClick={() => { setVideoModalOpen(false); mintNft(); }}  >
                       Send Proof
                     </button>
                   </div>
@@ -181,6 +185,8 @@ function UserHero() {
             </div>
           </Modal>
 
+          <Features />
+
 
 
 
@@ -188,6 +194,10 @@ function UserHero() {
         </div>
       </div>
     </section>
+
+
+
+
   );
 }
 
