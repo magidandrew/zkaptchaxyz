@@ -75,38 +75,19 @@ function UserHero() {
     const hash = Web3.utils.keccak256(Web3.utils.keccak256(h));
     console.log(hash);
 
-    //   const web3 = new Web3('https://alpha-rpc.scroll.io/l2');
-    //   console.log(web3);
-    //   const address= "0x3399D548ef38e36dF219f08c99dDC7230ddf8aE4";
-
-    //   const contract = new web3.eth.Contract(captchacollection.abi, address);
-    //   console.log(contract);
-    //   const gasLimit = 80000;
-    //   console.log("account: " + account);
-    //   contract.methods.createToken("https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/armstrong.json", mp, hash).send({ from: account, gas: gasLimit }, (error, transactionHash) => {
-    //     if (error) {
-    //         console.error(error);
-    //     } else {
-    //         console.log(transactionHash);
-    //     }
-    // });
-
     setMintResult(true);
-
-    // contract.createToken("https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/armstrong.json", mp, hash)
-
-
-
-    // const myString = 'hello world';
-    // const myBytes = Buffer.from([0x01, 0x02, 0x03]);
-    // const result = hashStringWithBytes(myString, myBytes);
-
   }
 
   const handleMerkleProof = (merkleProof) => {
     // Do something with the merkleProof data
     console.log(merkleProof);
     mp = merkleProof;
+  };
+
+  const handleSubmission = (msg) => {
+    console.log(msg);
+    setVideoModalOpen(false);
+    // mp = merkleProof;
   };
   return (
     <section className="relative">
@@ -158,32 +139,7 @@ function UserHero() {
             </div>
           </div>}
 
-          <Modal id="modal" ariaLabel="modal-headlinew to" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)} onMerkleProof={handleMerkleProof} >
-            <div className="relative w-full h-full md:h-auto">
-
-              <div className="relative bg-gray-700 rounded-xl shadow dark:bg-gray-700">
-
-                <div className="flex justify-center grid-cols-2 content-between gap-4">
-                  <div className="mb-3 mt-3 max-w-3xl xl:w-64">
-                    <input
-                      type="text"
-                      className="form-control block w-full max-w-full text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      id="exampleFormControlInput5"
-                      placeholder="Type the text"
-                      ref={inputRef}
-                    />
-                  </div>
-                  <div data-aos="fade-up" data-aos-delay="400">
-                    <button className="mb-3 mt-3  bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-transform duration-150 ease-in-out" onClick={() => { setVideoModalOpen(false); mintNft(); }}  >
-                      Send Proof
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </Modal>
+          {/* <Modal id="modal" ariaLabel="modal-headlinew to" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)} onMerkleProof={handleMerkleProof} onSubmission={handleSubmission}></Modal> */}
 
           <Features />
 

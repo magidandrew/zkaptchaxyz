@@ -49,7 +49,7 @@ export const WalletProvider = ({ children }) => {
             // Define the network you want to switch to
             const newNetwork = {
                 chainId: ethers.utils.hexStripZeros(ethers.utils.hexlify(scrollChainId)), // Main Ethereum network
-                chainName: "Ethereum",
+                chainName: "Scroll Alpha Testnet",
                 nativeCurrency: {
                     name: "Ether",
                     symbol: "ETH",
@@ -73,6 +73,9 @@ export const WalletProvider = ({ children }) => {
             console.log(`Connected to account: ${accounts[0]}`);
             setAccount(accounts[0]);
             setProvider(provider);
+
+
+
         } catch (error) {
             console.error(error);
         }
@@ -80,6 +83,7 @@ export const WalletProvider = ({ children }) => {
 
     const disconnectWallet = () => {
         setAccount('');
+        setProvider(null);
         // Perform any further actions needed to disconnect the user's wallet account
     };
 

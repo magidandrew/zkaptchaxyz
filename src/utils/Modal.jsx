@@ -8,7 +8,8 @@ function Modal({
   ariaLabel,
   show,
   handleClose,
-  onMerkleProof
+  onMerkleProof,
+  onSubmission
 }) {
 
   const modalContent = useRef(null);
@@ -104,7 +105,30 @@ function Modal({
 
 
           {imageSrc && <img className="mx-auto rounded-lg" src={imageSrc} alt="PNG" />}
-          {children}
+            <div className="relative w-full h-full md:h-auto">
+
+              <div className="relative bg-gray-700 rounded-xl shadow dark:bg-gray-700">
+
+                <div className="flex justify-center grid-cols-2 content-between gap-4">
+                  <div className="mb-3 mt-3 max-w-3xl xl:w-64">
+                    <input
+                      type="text"
+                      className="form-control block w-full max-w-full text-base font-normal text-gray-700 bg-gray-100 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      id="captchaAnswer"
+                      placeholder="Type the text"
+                      // ref={inputRef}
+                    />
+                  </div>
+                  <div data-aos="fade-up" data-aos-delay="400">
+                    <button className="mb-3 mt-3  bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full transition-transform duration-150 ease-in-out" onClick={() => { const res = document.getElementById("captchaAnswer"); onSubmission(res.value)}}>
+                      Create Proof & Mint
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
         </div>
 
 
@@ -123,5 +147,6 @@ Modal.propTypes = {
   ariaLabel: PropTypes.string,
   show: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  onMerkleProof: PropTypes.func.isRequired // Add this line
+  onMerkleProof: PropTypes.func.isRequired,
+  onSubmission: PropTypes.func.isRequired
 };

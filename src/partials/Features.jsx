@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Illustration from '../images/features-illustration.svg';
-import FeaturesIcon01 from '../images/features-icon-01.svg';
-import FeaturesIcon02 from '../images/features-icon-02.svg';
-import FeaturesIcon03 from '../images/features-icon-03.svg';
-import FeaturesIcon04 from '../images/features-icon-04.svg';
+// import FeaturesIcon01 from '../images/features-icon-01.svg';
+// import FeaturesIcon02 from '../images/features-icon-02.svg';
+// import FeaturesIcon03 from '../images/features-icon-03.svg';
+// import FeaturesIcon04 from '../images/features-icon-04.svg';
 import Avatar01 from '../images/avatar-01.jpg';
 import Altman from '../images/altman.png';
 import Armstrong from '../images/armstrong.png';
@@ -16,14 +16,50 @@ import Gensler from '../images/gensler.png';
 import Kulechov from '../images/kulechov.png';
 import Saylor from '../images/saylor.png';
 import Zhao from '../images/zhao.png';
+import Modal from "../utils/Modal";
 
+import captchaCollectionABI from '../captchacollection.json';
+import { WalletProvider, useWallet } from "../utils/WalletContext";
+import { ethers, providers } from 'ethers';
 
 // Import Swiper
 import Swiper, { Autoplay, Navigation } from 'swiper';
 import 'swiper/css';
 Swiper.use([Autoplay, Navigation]);
+// const { account, linkWallet, disconnectWallet, provider } = useWallet();
 
 function Features() {
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const { account, linkWallet, disconnectWallet, provider } = useWallet();
+
+  const handleLinkWallet = async () => {
+      await linkWallet();
+      // perform further actions with the user's wallet account
+  };
+
+  const name2Uri = {"altman": "https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/altman.json",
+  "armstrong": "https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/altman.json",
+  "benet": "https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/benet.json",
+  "buterin": "https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/buterin.json",
+  "dorsey": "https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/dorsey.json",
+  "fried": ,
+  "fried": ,
+  "gensler": ,
+  "kulechov": ,
+  "saylor": ,
+  "zhao": }
+
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/altman.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/armstrong.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/benet.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/buterin.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/dorsey.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/fried.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/gensler.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/kulechov.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/saylor.json,
+  https://gateway.pinata.cloud/ipfs/QmYseRJwUGHJbqYvTqivquZxE8pmjbTUMoHd6B6S5t4MoA/zhao.json
+
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     const carousel = new Swiper('.carousel', {
@@ -52,6 +88,27 @@ function Features() {
       },
     });
   }, []);
+
+  const handleMerkleProof = (merkleProof) => {
+    // Do something with the merkleProof data
+    console.log(merkleProof);
+    // mp = merkleProof;
+  };
+
+  const handleSubmission = (tokenURI) => {
+    console.log("handleSubmission: " + tokenURI);
+    setVideoModalOpen(false);
+    console.log(provider);
+    const toAddress = "0xF988A798183058d830dEf45E592483E57Ef78002";
+    const captchaCollectionContract = new ethers.Contract(toAddress, captchaCollectionABI.abi, provider.getSigner());
+    const res = await captchaCollectionContract.createToken();
+
+  };
+
+  // const mintNft = async (tokenURI) => {
+  //   console.log(tokenURI)
+  // }
+
 
   return (
     <section className="relative">
@@ -83,13 +140,15 @@ function Features() {
                 />
                 <div className="grow">
                   <div className="font-hkgrotesk font-bold text-xl">Sam Altman Kaptcha</div>
-
                 </div>
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="btn font-medium text-gray-300 hover:text-white bg-indigo-500 hover:bg-indigo-600 rounded-full inline-flex items-center transition duration-150 ease-in-out group"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setVideoModalOpen(true);}}
+                  >
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
+
                 </div>
               </div>
 
@@ -168,7 +227,7 @@ function Features() {
                   alt="Icon 01"
                 />
                 <div className="grow">
-                  <div className="font-hkgrotesk font-bold text-xl">Sam Bank-Fried Kaptcha</div>
+                  <div className="font-hkgrotesk font-bold text-xl">Sam Bankman-Fried Kaptcha</div>
 
                 </div>
                 <div className="text-right">
@@ -240,14 +299,12 @@ function Features() {
 
                 </div>
                 <div className="text-right">
-                  <a className="font-medium text-indigo-500 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
+                  <a className="font-medium text-indigo-500 hover:bg-indigo-600 inline-flex items-center transition duration-150 ease-in-out group" href="#0">
                     Mint Now{' '}
                     <span className="tracking-normal group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                   </a>
                 </div>
               </div>
-
-
 
             </div>
           </div>
@@ -268,6 +325,11 @@ function Features() {
           </div>
         </div>
       </div>
+
+      {/* modal section */}
+      <Modal id="modal" ariaLabel="modal-headlinew to" show={videoModalOpen} handleClose={() => setVideoModalOpen(false)} onMerkleProof={handleMerkleProof} onSubmission={handleSubmission}></Modal>
+
+
     </section>
   );
 }
