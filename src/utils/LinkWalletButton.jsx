@@ -2,7 +2,7 @@ import React from 'react';
 import { useWallet, WalletProvider } from './WalletContext';
 
 const LinkWalletButton = ({ className }) => {
-  const { account, linkWallet, disconnectWallet, existingweb3 } = useWallet();
+  const { account, linkWallet, disconnectWallet, web3instance } = useWallet();
 
   const buttonText = account
     ? `${account.slice(0, 6)}...${account.slice(-4)}`
